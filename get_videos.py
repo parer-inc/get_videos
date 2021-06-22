@@ -8,7 +8,7 @@ from methods.connection import get_redis, get_cursor
 
 r = get_redis()
 
-def get_videos(type, col=False, value=False):
+def get_videos(type = "ALL", col="", value=""):
     """Returns videos info from databse (table videos)"""
     cursor, _ = get_cursor()
     if not cursor:
@@ -16,10 +16,12 @@ def get_videos(type, col=False, value=False):
         return False
     q = '''SELECT * FROM videos '''
     if type is not None:
-        value = value.replace(";", "")
-        value = value.replace("'", "''")
         if type == "WHERE" and col and value:
+            value = value.replace(";", "")
+            value = value.replace("'", "''")
             q += f"""WHERE {col} = '{value}'"""
+        elif type == "ALL":
+            pass
         else:
             return False
     try:
