@@ -8,6 +8,7 @@ from methods.connection import get_redis, get_cursor
 
 r = get_redis()
 
+
 def get_videos(type = "ALL", col="", value=""):
     """Returns videos info from databse (table videos)"""
     cursor, _ = get_cursor()
